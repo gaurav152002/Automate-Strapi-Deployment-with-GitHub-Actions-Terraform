@@ -55,7 +55,7 @@ resource "aws_security_group" "strapi_sg" {
   }
 
   tags = {
-    Name = "Strapi-SG"
+    Name = "Strapi-SG-task6"
   }
 }
 
