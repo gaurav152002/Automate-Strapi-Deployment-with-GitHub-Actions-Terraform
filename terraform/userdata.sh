@@ -6,7 +6,7 @@ apt update -y
 # Install Docker
 apt install docker.io -y
 
-# Enable Docker
+# Start and enable Docker
 systemctl start docker
 systemctl enable docker
 
