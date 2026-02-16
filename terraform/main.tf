@@ -68,6 +68,9 @@ resource "aws_instance" "strapi_server" {
   key_name      = "Terraform"             # Your AWS key pair name
 
   subnet_id = data.aws_subnets.default_subnets.ids[0]
+  
+ # Public IP is assigned
+  associate_public_ip_address = true
 
   vpc_security_group_ids = [aws_security_group.strapi_sg.id]
 

@@ -41,11 +41,7 @@ jobs:
         working-directory: ./terraform
 
       # Step 6: Terraform Apply
-      #- name: Terraform Apply
-      #  run: terraform apply -auto-approve -var="image_tag=${{ github.event.inputs.image_tag }}"
-      #  working-directory: ./terraform
-
-      - name: Terraform Destroy
-        run: terraform destroy -auto-approve -var="image_tag=${{ github.event.inputs.image_tag }}"
+      - name: Terraform Apply
+        run: terraform apply -auto-approve -var="image_tag=${{ github.event.inputs.image_tag }}"
         working-directory: ./terraform
 
