@@ -14,15 +14,15 @@ jobs:
     runs-on: ubuntu-latest   # GitHub creates temporary Linux runner
 
     steps:
-      # Step 1: Checkout repository code
+       # Checkout repository code
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Step 2: Install Terraform
+      # Install Terraform
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
 
-      # Step 3: Configure AWS credentials (from GitHub Secrets)
+      # Configure AWS credentials (from GitHub Secrets)
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -30,17 +30,17 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1   
 
-      # Step 4: Terraform Init
+      # Terraform Init
       - name: Terraform Init
         run: terraform init
         working-directory: ./terraform
 
-      # Step 5: Terraform Plan
+      # Terraform Plan
       - name: Terraform Plan
         run: terraform plan -var="image_tag=${{ github.event.inputs.image_tag }}"
         working-directory: ./terraform
 
-      # Step 6: Terraform Apply
+      # Terraform Apply
       - name: Terraform Apply
         run: terraform apply -auto-approve -var="image_tag=${{ github.event.inputs.image_tag }}"
         working-directory: ./terraform
