@@ -31,11 +31,14 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}   # From GitHub Secrets
 
       # Build Docker image and push to Docker Hub
+      - name: Set Image Tag
+        run: echo "IMAGE_NAME=${{ secrets.DOCKER_USERNAME }}/strapi-task6:${{ github.sha }}" >> $GITHUB_ENV
+
       - name: Build Docker Image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/strapi-task6:${{ github.sha }} ./strapi-app
+        run: docker build ./strapi-app -t $IMAGE_NAME
 
       - name: Push Docker Image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/strapi-task6:${{ github.sha }}
+        run: docker push $IMAGE_NAME
 
 
 
