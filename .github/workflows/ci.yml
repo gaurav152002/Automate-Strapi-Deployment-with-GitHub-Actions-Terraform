@@ -1,0 +1,39 @@
+name: Build and Push Docker Image
+
+# Trigger the workflow on push to main branch
+on:
+  push:              # Trigger when code is pushed
+    branches:
+      - main         # Only when pushing to main branch
+
+# A workflow contains jobs
+jobs:
+  build:             # This job will build and push the Docker image
+    runs-on: ubuntu-latest   # GitHub creates a fresh Ubuntu Linux machine
+
+    steps:           # Steps are executed one by one
+
+      # Download your repository code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Enable advanced Docker builder (Buildx)
+      # Required for modern Docker builds
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # Login to Docker Hub
+      # This allows pushing images to your Docker account
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}   # From GitHub Secrets
+          password: ${{ secrets.DOCKER_PASSWORD }}   # From GitHub Secrets
+
+      # Build Docker image and push to Docker Hub
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./strapi-app    # Folder where Dockerfile exists
+          push: true               # Actually push image to Docker Hub
+          tags: ${{ secrets.DOCKER_USERNAME }}/strapi-task6:${{ github.sha }}
