@@ -15,22 +15,7 @@ The pipeline automatically:
 
 # 🏗 Architecture Flow
 
-Developer Push
-↓
-GitHub Actions (CI)
-↓
-Docker Image Build
-↓
-Push to Docker Hub
-↓
-Terraform Workflow (CD)
-↓
-AWS EC2 (Ubuntu)
-↓
-Docker Pull + Run
-↓
-Strapi Available via Public IP
-
+Developer Push -> GitHub Actions (CI) -> Docker Image Build -> Push to Docker Hub -> Terraform Workflow (CD) -> AWS EC2 (Ubuntu) -> Docker Pull + Run -> Strapi Available via Public IP
 
 ---
 
@@ -45,26 +30,6 @@ Strapi Available via Public IP
 - Security Groups
 - 2GB Swap Memory
 - 25GB Root Volume
-
----
-
-# 📂 Project Structure
-
-Task-6/
-│
-├── strapi-app/
-│ ├── Dockerfile
-│ ├── package.json
-│ └── Application Code
-│
-├── terraform/
-│ ├── main.tf
-│ ├── variables.tf
-│ └── userdata.sh
-│
-└── .github/workflows/
-├── ci.yaml
-└── terraform.yaml
 
 ---
 
@@ -193,7 +158,3 @@ sudo docker logs strapi
 ✅ Publicly Accessible Strapi Application  
 
 ---
-
-# 👨‍💻 Author
-Gauravjith S  
-DevOps Intern

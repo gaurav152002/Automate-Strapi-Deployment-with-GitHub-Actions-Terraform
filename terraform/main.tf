@@ -86,7 +86,7 @@ resource "aws_instance" "strapi_server" {
   })
 
   tags = {
-    Name = "Strapi-Server"
+    Name = "Strapi-Server-task6"
   }
 }
 
