@@ -162,7 +162,7 @@ image_tag = <commit-sha>
 AWS → EC2 → Copy Public IP
 
 Open:
-http://<public-ip>:1337
+http://{public-ip}:1337
 
 ---
 
