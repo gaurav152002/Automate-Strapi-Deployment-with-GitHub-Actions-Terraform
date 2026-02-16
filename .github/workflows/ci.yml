@@ -2,14 +2,12 @@
 name: Build and Push Docker Image
 
 # Define when this workflow should run
-#on:
- # push:                 # Trigger when code is pushed
-    #branches:
-     # - main            # Only trigger for main branch
-
-      # Run only when manually triggered
 on:
-  workflow_dispatch:
+  push:                 # Trigger when code is pushed
+    branches:
+       - main            # Only trigger for main branch
+
+
 
 # A workflow contains jobs
 jobs:
