@@ -3,10 +3,9 @@ name: Build and Push Docker Image
 
 # Define when this workflow should run
 on:
-  push:                 # Trigger when code is pushed
+  push:
     branches:
-       - main            # Only trigger for main branch
-
+      - main
 
 
 # A workflow contains jobs

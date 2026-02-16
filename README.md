@@ -16,20 +16,21 @@ The pipeline automatically:
 # 🏗 Architecture Flow
 
 Developer Push
-      ↓
+↓
 GitHub Actions (CI)
-      ↓
+↓
 Docker Image Build
-      ↓
+↓
 Push to Docker Hub
-      ↓
+↓
 Terraform Workflow (CD)
-      ↓
+↓
 AWS EC2 (Ubuntu)
-      ↓
+↓
 Docker Pull + Run
-      ↓
+↓
 Strapi Available via Public IP
+
 
 ---
 
@@ -52,18 +53,18 @@ Strapi Available via Public IP
 Task-6/
 │
 ├── strapi-app/
-│   ├── Dockerfile
-│   ├── package.json
-│   └── Application Code
+│ ├── Dockerfile
+│ ├── package.json
+│ └── Application Code
 │
 ├── terraform/
-│   ├── main.tf
-│   ├── variables.tf
-│   └── userdata.sh
+│ ├── main.tf
+│ ├── variables.tf
+│ └── userdata.sh
 │
 └── .github/workflows/
-    ├── ci.yaml
-    └── terraform.yaml
+├── ci.yaml
+└── terraform.yaml
 
 ---
 
