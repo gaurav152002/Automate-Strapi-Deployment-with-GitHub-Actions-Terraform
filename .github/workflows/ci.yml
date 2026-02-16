@@ -1,49 +1,41 @@
+# Name of the workflow (shown in GitHub Actions tab)
 name: Build and Push Docker Image
 
-# Trigger the workflow on push to main branch
+# Define when this workflow should run
 on:
-  push:              # Trigger when code is pushed
+  push:                 # Trigger when code is pushed
     branches:
-      - main         # Only when pushing to main branch
+      - main            # Only trigger for main branch
 
 # A workflow contains jobs
 jobs:
-  build:             # This job will build and push the Docker image
-    runs-on: ubuntu-latest   # GitHub creates a fresh Ubuntu Linux machine
+  build:                # Job name (can be anything)
+    runs-on: ubuntu-latest   # GitHub creates a fresh Ubuntu Linux runner
 
-    steps:           # Steps are executed one by one
-
-      # Download your repository code
+    steps:
+      # Step 1: Download your repository code into the runner
       - name: Checkout repository
         uses: actions/checkout@v3
 
-
-      # 🔥 ADD DEBUG STEP RIGHT HERE
-      - name: Debug Docker Username
-        run: echo "Username is '${{ secrets.DOCKER_USERNAME }}'"
-
-      # Enable advanced Docker builder (Buildx)
-      # Required for modern Docker builds
+      # Step 2: Enable Docker Buildx (modern Docker builder)
+      # Required for advanced builds and multi-platform support
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      # Login to Docker Hub
-      # This allows pushing images to your Docker account
+      # Step 3: Login to Docker Hub
+      # Uses secrets stored in GitHub repository settings
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}   # From GitHub Secrets
-          password: ${{ secrets.DOCKER_PASSWORD }}   # From GitHub Secrets
+          username: ${{ secrets.DOCKER_USERNAME }}   # Docker Hub username
+          password: ${{ secrets.DOCKER_PASSWORD }}   # Docker Hub access token (Read & Write)
 
-      # Build Docker image and push to Docker Hub
-      - name: Set Image Tag
-        run: echo "IMAGE_NAME=${{ secrets.DOCKER_USERNAME }}/strapi-task6:${{ github.sha }}" >> $GITHUB_ENV
-
-      - name: Build Docker Image
-        run: docker build ./strapi-app -t $IMAGE_NAME
-
-      - name: Push Docker Image
-        run: docker push $IMAGE_NAME
-
-
-
+      # Step 4: Build Docker image and push to Docker Hub
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./strapi-app   # Folder where Dockerfile exists
+          push: true              # Push image after building
+          tags: ${{ secrets.DOCKER_USERNAME }}/strapi-task6:${{ github.sha }}
+          # Image will look like:
+          # gauravjith/strapi-task6:<commit-sha>
