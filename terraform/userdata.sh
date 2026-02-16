@@ -19,11 +19,13 @@ echo '/swapfile none swap sw 0 0' >> /etc/fstab
 docker pull gauravjith/strapi-task6:${image_tag}
 
 # Run Strapi with required environment variables
-docker run -d -p 1337:1337 \
+docker run -d \
   --name strapi \
+  -p 1337:1337 \
   --restart unless-stopped \
   -e APP_KEYS="IsSigc7coPDiBQM+8jtTHg==,SyaCArg/azXlfySStmV3PQ==,46l31FehiLUsZLWk43FoWQ==,mGmMa6kPEurH/hILqJL+kA==" \
   -e API_TOKEN_SALT="2z0oGPhBUkJrYLvUKXBFkA==" \
   -e ADMIN_JWT_SECRET="XrLYZf9YbHqZg0kdVqgeLg==" \
-  -e JWT_SECRET="jwtsecret123" \
+  -e TRANSFER_TOKEN_SALT="fFjYGolekKhD2e9Zqcvx1w==" \
+  -e ENCRYPTION_KEY="8XjElnUxKP44sNv03Cu65Q==" \
   gauravjith/strapi-task6:${image_tag}
