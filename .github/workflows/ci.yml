@@ -34,6 +34,9 @@ jobs:
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v4
         with:
-          context: ./strapi-app    # Folder where Dockerfile exists
-          push: true               # Actually push image to Docker Hub
-          tags: ${{ secrets.DOCKER_USERNAME }}/strapi-task6:${{ github.sha }}
+          context: ./strapi-app
+          push: true
+          tags: ${{ env.DOCKER_IMAGE }}
+        env:
+          DOCKER_IMAGE: ${{ secrets.DOCKER_USERNAME }}/strapi-task6:${{ github.sha }}
+
