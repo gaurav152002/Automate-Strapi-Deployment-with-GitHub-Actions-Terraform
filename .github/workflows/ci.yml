@@ -17,6 +17,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+
+      # 🔥 ADD DEBUG STEP RIGHT HERE
+      - name: Debug Docker Username
+        run: echo "Username is '${{ secrets.DOCKER_USERNAME }}'"
+
       # Enable advanced Docker builder (Buildx)
       # Required for modern Docker builds
       - name: Set up Docker Buildx
